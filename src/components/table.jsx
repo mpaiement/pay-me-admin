@@ -1,69 +1,45 @@
 import React from 'react';
 
-const Table = ({ headers, productss }) => {
-  // Debug: Log the type of headers
-  console.log('Headers type:', typeof headers);
-  console.log('Headers value:', headers);
-  const products = [
-    {
-      name: "Apple MacBook Pro 17\"",
-      color: "Silver",
-      category: "Laptop",
-      price: "$2999"
-    },
-    {
-      name: "Microsoft Surface Pro",
-      color: "White",
-      category: "Laptop PC",
-      price: "$1999"
-    },
-    {
-      name: "Magic Mouse 2",
-      color: "Black",
-      category: "Accessories",
-      price: "$99"
-    }
-  ];
+const Table = ({ headers, users, onDelete }) => {
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            {(Array.isArray(headers) ? headers : []).map((header, index) => (
-              <th key={index} scope="col" className="px-6 py-3">
-                {header}
-              </th>
-            ))}
-            <th scope="col" className="px-6 py-3">
-              <span className="sr-only">Edit</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(products) && products.map((product, index) => (
-            <tr
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          {headers.map((header, index) => (
+            <th
               key={index}
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
-              >
-                {product.name}
-              </th>
-              <td className="px-6 py-4">{product.color}</td>
-              <td className="px-6 py-4">{product.category}</td>
-              <td className="px-6 py-4">{product.price}</td>
-              <td className="px-6 py-4 text-right">
-                <a href="#" className="font-medium text-fuchsia-500 dark:text-fuchsia-400 hover:underline">
-                  Edit
-                </a>
-              </td>
-            </tr>
+              {header}
+            </th>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {users.map((user) => (
+          <tr key={user.idUser}>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <div className="text-sm text-gray-900">{user.name}</div>
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <div className="text-sm text-gray-900">{user.email}</div>
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <div className="text-sm text-gray-900">{user.idUser}</div>
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <button
+                onClick={() => onDelete(user.idUser)}
+                className="text-red-600 hover:text-red-900"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
