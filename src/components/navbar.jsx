@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/pay_me_logo.png'; 
+import logo from '../assets/pay_me_logo.png';
 import Avatar from './avatar';
 const Navbar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -56,16 +56,16 @@ const Navbar = () => {
               )}
               <span className="sr-only">Toggle sidebar</span>
             </button>
-            <div className="flex items-center justify-between mr-4">
+            <div className="flex justify-center w-44 mr-4 ">
               <img
                 src={logo}
-                className="mr-3 h-12"
+                className="mr-3  h-12"
                 alt="PayMe Logo"
               />
             </div>
             <form action="#" method="GET" className="hidden md:block md:pl-2">
               <label htmlFor="topbar-search" className="sr-only">Search</label>
-              <div className="relative md:w-64 md:w-96">
+              <div className="relative md:w-96">
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                   <svg
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"

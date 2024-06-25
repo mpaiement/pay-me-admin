@@ -7,7 +7,11 @@ const Users = () => {
   useEffect(() => {
     fetch('http://localhost:3000/user')
       .then(response => response.json())
-      .then(data => setUsers(data))
+      .then(data => {
+        setUsers(data)
+        console.log("🚀 ~ useEffect ~ data:", data)
+
+      })
       .catch(error => console.error('Error fetching user data:', error));
   }, []);
 
@@ -17,14 +21,14 @@ const Users = () => {
       fetch(`http://localhost:3000/user/${idUser}`, {
         method: 'DELETE',
       })
-      .then(response => {
-        if (response.ok) {
-          setUsers(users.filter(user => user.idUser !== idUser));
-        } else {
-          console.error('Error deleting user:', response);
-        }
-      })
-      .catch(error => console.error('Error deleting user:', error));
+        .then(response => {
+          if (response.ok) {
+            setUsers(users.filter(user => user.idUser !== idUser));
+          } else {
+            console.error('Error deleting user:', response);
+          }
+        })
+        .catch(error => console.error('Error deleting user:', error));
     }
   };
 
@@ -32,8 +36,11 @@ const Users = () => {
 
   return (
     <div>
-      <h1>User List</h1>
-      <Table headers={headers} users={users} onDelete={handleDelete} />
+      <h1 className='text-2xl text-bold'>User List</h1>
+      <div className="bg-white p-4 rounded-md shadow-md flex-1 ml-4">
+
+        <Table headers={headers} users={users} onDelete={handleDelete} />
+      </div>
     </div>
   );
 }
